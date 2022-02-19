@@ -9,20 +9,26 @@
       for (const mutation of mutationList) {
         if (mutation.type === "childList") {
           for (const addedNode of mutation.addedNodes) {
-            if (
-              addedNode.nodeType === 1 &&
-              addedNode.matches(
+            if (addedNode.nodeType === 1) {
+              const settingsButton = addedNode.querySelector(
                 `#pocket-extension-root > div > div > div > footer > button:nth-child(2)`
-              )
-            ) {
-              console.log(addedNode);
-              // quick and dirty way to remove existing listeners, thanks stackoverflow
-              const new_element = addedNode.cloneNode(true);
-              addedNode.parentNode.replaceChild(addedNode, new_element);
+              );
 
-              new_element.onclick = (e) => {
-                window.open("https://rickroll.com", "_blank");
-              };
+              if (settingsButton) {
+                // quick and dirty way to remove existing listeners, thanks stackoverflow
+                const new_element = settingsButton.cloneNode(true);
+                settingsButton.parentNode.replaceChild(
+                  new_element,
+                  settingsButton
+                );
+
+                new_element.onclick = (e) => {
+                  window.open(
+                    "https://www.youtube.com/watch?v=oHg5SJYRHA0",
+                    "_blank"
+                  );
+                };
+              }
             }
           }
         }
