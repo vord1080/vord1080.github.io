@@ -15,6 +15,7 @@
                 `#pocket-extension-root > div > div > div > footer > button:nth-child(2)`
               )
             ) {
+              console.log(addedNode);
               // quick and dirty way to remove existing listeners, thanks stackoverflow
               const new_element = addedNode.cloneNode(true);
               addedNode.parentNode.replaceChild(addedNode, new_element);
