@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Pocket</title>
+  </head>
+  <script>
+    const observer = new MutationObserver((mutationList) => {
+      for (const mutation of mutationList) {
+        if (mutation.type === "childList") {
+          for (const addedNode of mutation.addedNodes) {
+            if (
+              addedNode.nodeType === 1 &&
+              addedNode.matches(
+                `#pocket-extension-root > div > div > div > footer > button:nth-child(2)`
+              )
+            ) {
+              // quick and dirty way to remove existing listeners, thanks stackoverflow
+              const new_element = addedNode.cloneNode(true);
+              addedNode.parentNode.replaceChild(addedNode, new_element);
+
+              new_element.onclick = (e) => {
+                window.open("https://rickroll.com", "_blank");
+              };
+            }
+          }
+        }
+      }
+    });
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+    });
+  </script>
+  <body>
+    Hello there!
+  </body>
+</html>
